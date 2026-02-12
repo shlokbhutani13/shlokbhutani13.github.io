@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shlok Bhutani | Portfolio</title>
+  <meta name="description" content="Shlok Bhutani — CS student at UNC Chapel Hill. ML, full-stack, and security projects with live demos." />
+
+  <style>
+    :root{
+      --bg:#0b0f16;
+      --panel:#111827;
+      --text:#e5e7eb;
+      --muted:#a1a1aa;
+      --border:rgba(255,255,255,.10);
+      --shadow:0 18px 50px rgba(0,0,0,.35);
+      --r:18px;
+      --link:#93c5fd;
+      --btn:#1f2937;
+      --btn2:#2563eb;
+    }
+
+    /* Light theme */
+    [data-theme="light"]{
+      --bg:#ffffff;
+      --panel:#f8fafc;
+      --text:#0f172a;
+      --muted:#475569;
+      --border:rgba(15,23,42,.12);
+      --shadow:0 14px 40px rgba(2,6,23,.10);
+      --link:#2563eb;
+      --btn:#eef2ff;
+      --btn2:#2563eb;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+
+    a{color:var(--link); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{
+      width:min(1020px, calc(100% - 32px));
+      margin:0 auto;
+      padding:22px 0 60px;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      position:sticky;
+      top:0;
+      padding:14px 0;
+      background:color-mix(in oklab, var(--bg) 86%, transparent);
+      backdrop-filter: blur(10px);
+      z-index:10;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .avatar{
+      width:44px;height:44px;
+      border-radius:16px;
+      display:grid;place-items:center;
+      background:color-mix(in oklab, var(--panel) 85%, transparent);
+      border:1px solid var(--border);
+      font-weight:900;
+      letter-spacing:.4px;
+      user-select:none;
+    }
+    .name{font-weight:900; letter-spacing:-.2px}
+    .tag{font-size:13px; color:var(--muted); margin-top:2px}
+
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .pill{
+      border:1px solid var(--border);
+      background:color-mix(in oklab, var(--panel) 82%, transparent);
+      color:var(--text);
+      padding:9px 12px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:13px;
+      cursor:pointer;
+    }
+    .pill:hover{filter:brightness(1.04)}
+    .pill.primary{
+      background:color-mix(in oklab, var(--btn2) 28%, var(--panel));
+      border-color:color-mix(in oklab, var(--btn2) 40%, var(--border));
+    }
+
+    .card{
+      background:color-mix(in oklab, var(--panel) 92%, transparent);
+      border:1px solid var(--border);
+      border-radius:var(--r);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+
+    .hero{
+      margin-top:12px;
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:14px;
+      align-items:stretch;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(26px, 3.4vw, 44px);
+      letter-spacing:-.9px;
+      line-height:1.1;
+    }
+
+    .lead{
+      margin:0 0 14px;
+      color:color-mix(in oklab, var(--text) 86%, var(--muted));
+      font-size:16px;
+    }
+
+    .btnrow{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:8px;
+      padding:11px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:color-mix(in oklab, var(--btn) 75%, transparent);
+      color:var(--text);
+      font-weight:800;
+      cursor:pointer;
+    }
+    .btn.primary{
+      background:color-mix(in oklab, var(--btn2) 35%, var(--btn));
+      border-color:color-mix(in oklab, var(--btn2) 55%, var(--border));
+    }
+
+    .mini{
+      display:grid;
+      gap:8px;
+      align-content:start;
+    }
+    .mini .line{
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:color-mix(in oklab, var(--panel) 86%, transparent);
+      color:var(--muted);
+      font-weight:650;
+      font-size:13px;
+    }
+    .mini b{color:var(--text)}
+
+    .section{
+      margin-top:16px;
+    }
+    .section h2{
+      margin:0 0 10px;
+      font-size:18px;
+      letter-spacing:-.2px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+
+    .proj{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      padding:16px;
+      border-radius:18px;
+      border:1px solid var(--border);
+      background:color-mix(in oklab, var(--panel) 88%, transparent);
+      transition: transform .12s ease, filter .12s ease;
+    }
+    .proj:hover{transform: translateY(-1px); filter:brightness(1.03)}
+
+    .projTitle{
+      font-weight:900;
+      letter-spacing:-.2px;
+      margin:0;
+      font-size:16px;
+    }
+    .projDesc{
+      margin:0;
+      color:var(--muted);
+      font-size:13.5px;
+    }
+    .projTags{
+      display:flex; flex-wrap:wrap; gap:8px;
+      margin-top:auto;
+    }
+    .tagchip{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:color-mix(in oklab, var(--panel) 85%, transparent);
+      color:var(--muted);
+      font-weight:700;
+    }
+    .projLinks{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .projLinks a{
+      font-weight:800;
+      font-size:13px;
+    }
+
+    .footer{
+      margin-top:22px;
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      padding-top:10px;
+    }
+
+    @media (max-width: 980px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap" id="top">
+    <header class="topbar">
+      <div class="brand">
+        <div class="avatar">SB</div>
+        <div>
+          <div class="name">Shlok Bhutani</div>
+          <div class="tag">UNC Chapel Hill • Computer Science • ML + Full-Stack</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a class="pill" href="#projects">Projects</a>
+        <a class="pill" href="#about">About</a>
+        <a class="pill" href="#contact">Contact</a>
+        <button class="pill primary" id="themeBtn" type="button">Toggle theme</button>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="card">
+        <h1>Building practical projects that actually ship.</h1>
+        <p class="lead">
+          I’m a CS student at UNC Chapel Hill focused on machine learning, software engineering, and security.
+          I like turning ideas into real demos people can click and use.
+        </p>
+
+        <div class="btnrow">
+          <a class="btn primary" href="https://github.com/shlokbhutani13" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="btn" href="#projects">See projects</a>
+          <!-- Replace with your resume link if you have one -->
+          <a class="btn" href="#" onclick="alert('Add your resume link here'); return false;">Resume</a>
+        </div>
+      </div>
+
+      <div class="card mini">
+        <div class="line"><b>Currently:</b> building ML + web demos for my portfolio</div>
+        <div class="line"><b>Strengths:</b> shipping end-to-end projects, clean UI, deployment</div>
+        <div class="line"><b>Looking for:</b> internships in SWE / ML / data</div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <h2>Projects</h2>
+
+      <div class="grid">
+        <div class="proj">
+          <h3 class="projTitle">churn-probability</h3>
+          <p class="projDesc">
+            Customer churn prediction with a clean Streamlit demo (simplified inputs) backed by a real ML pipeline.
+          </p>
+          <div class="projTags">
+            <span class="tagchip">Python</span><span class="tagchip">Scikit-learn</span><span class="tagchip">Streamlit</span>
+          </div>
+          <div class="projLinks">
+            <a href="https://github.com/shlokbhutani13/churn-probability" target="_blank" rel="noreferrer">GitHub</a>
+            <!-- Replace with your real live link -->
+            <a href="#" onclick="alert('Paste your Streamlit live link here'); return false;">Live demo</a>
+          </div>
+        </div>
+
+        <div class="proj">
+          <h3 class="projTitle">doge-forecast</h3>
+          <p class="projDesc">
+            Dogecoin forecasting app with a deployed Streamlit interface for interactive predictions.
+          </p>
+          <div class="projTags">
+            <span class="tagchip">ML</span><span class="tagchip">Time series</span><span class="tagchip">Streamlit</span>
+          </div>
+          <div class="projLinks">
+            <a href="https://github.com/shlokbhutani13/doge-forecast" target="_blank" rel="noreferrer">GitHub</a>
+            <!-- Replace with your real live link -->
+            <a href="https://doge-forecast-hzbcysrfyyxfrqzagu6vu7.streamlit.app/" target="_blank" rel="noreferrer">Live demo</a>
+          </div>
+        </div>
+
+        <div class="proj">
+          <h3 class="projTitle">tword</h3>
+          <p class="projDesc">
+            A dual-word Wordle-style browser game with Wordle UI and persistent progress (guest or sign-in).
+          </p>
+          <div class="projTags">
+            <span class="tagchip">JavaScript</span><span class="tagchip">Firebase</span><span class="tagchip">Game</span>
+          </div>
+          <div class="projLinks">
+            <a href="https://github.com/shlokbhutani13/tword" target="_blank" rel="noreferrer">GitHub</a>
+            <a href="#" onclick="alert('Paste your live GitHub Pages link here'); return false;">Live demo</a>
+          </div>
+        </div>
+
+        <div class="proj">
+          <h3 class="projTitle">price_tracker</h3>
+          <p class="projDesc">
+            A FastAPI web app that demonstrates scraping + tracking flow with a simple UI and deployment-ready setup.
+          </p>
+          <div class="projTags">
+            <span class="tagchip">FastAPI</span><span class="tagchip">Python</span><span class="tagchip">Web</span>
+          </div>
+          <div class="projLinks">
+            <a href="https://github.com/shlokbhutani13/price_tracker" target="_blank" rel="noreferrer">GitHub</a>
+            <a href="#" onclick="alert('Paste your Render URL here if you deployed it'); return false;">Live demo</a>
+          </div>
+        </div>
+
+        <div class="proj">
+          <h3 class="projTitle">ml-regression-demo</h3>
+          <p class="projDesc">
+            From-scratch regression demo showing gradient descent, loss, and evaluation without heavy ML abstractions.
+          </p>
+          <div class="projTags">
+            <span class="tagchip">NumPy</span><span class="tagchip">ML basics</span><span class="tagchip">Math</span>
+          </div>
+          <div class="projLinks">
+            <a href="https://github.com/shlokbhutani13/ml-regression-demo" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+
+        <div class="proj">
+          <h3 class="projTitle">More coming</h3>
+          <p class="projDesc">
+            I’m actively building more projects and polishing the portfolio. Check GitHub for the newest work.
+          </p>
+          <div class="projTags">
+            <span class="tagchip">WIP</span><span class="tagchip">Shipping</span>
+          </div>
+          <div class="projLinks">
+            <a href="https://github.com/shlokbhutani13" target="_blank" rel="noreferrer">All repos</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="card">
+        <h2>About</h2>
+        <p class="lead" style="margin:0">
+          I’m interested in machine learning and software engineering that creates real-world impact.
+          I like projects that go end-to-end: training models, building clean interfaces, and deploying them so others can try them.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="card">
+        <h2>Contact</h2>
+        <p class="lead" style="margin:0 0 10px">
+          The easiest way to reach me is email or LinkedIn.
+        </p>
+        <div class="btnrow">
+          <!-- Replace email + LinkedIn -->
+          <a class="btn primary" href="mailto:your@email.com">Email me</a>
+          <a class="btn" href="#" onclick="alert('Paste your LinkedIn link here'); return false;">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span id="year"></span> © Shlok Bhutani • Built with simple HTML/CSS • Hosted on GitHub Pages
+    </footer>
+  </div>
+
+  <script>
+    // year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // theme
+    const key = "sb_theme";
+    const root = document.documentElement;
+
+    function setTheme(t){
+      root.setAttribute("data-theme", t);
+      localStorage.setItem(key, t);
+    }
+
+    const saved = localStorage.getItem(key);
+    if(saved) setTheme(saved);
+
+    document.getElementById("themeBtn").addEventListener("click", () => {
+      const cur = root.getAttribute("data-theme") || "dark";
+      setTheme(cur === "dark" ? "light" : "dark");
+    });
+  </script>
+</body>
+</html>
