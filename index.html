@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Shlok Bhutani</title>
-  <meta name="description" content="Shlok Bhutani — CS student at UNC Chapel Hill. Projects in ML, web apps, and data." />
+  <meta name="description" content="Shlok Bhutani — CS student at UNC Chapel Hill. I build small, real projects in ML and web apps." />
 
   <style>
     :root{
@@ -17,8 +17,8 @@
       --shadow2:0 10px 25px rgba(2,6,23,.08);
       --r:18px;
 
-      --accent:#2563eb;      /* blue */
-      --accent2:#7c3aed;     /* purple */
+      --accent:#2563eb;
+      --accent2:#7c3aed;
       --chip:rgba(37,99,235,.10);
       --chipBorder:rgba(37,99,235,.22);
     }
@@ -40,8 +40,8 @@
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       background:
-        radial-gradient(900px 500px at 20% -10%, rgba(37,99,235,.20), transparent 55%),
-        radial-gradient(800px 500px at 90% 10%, rgba(124,58,237,.18), transparent 55%),
+        radial-gradient(900px 500px at 20% -10%, rgba(37,99,235,.18), transparent 55%),
+        radial-gradient(800px 500px at 90% 10%, rgba(124,58,237,.15), transparent 55%),
         var(--bg);
       color:var(--text);
     }
@@ -52,7 +52,6 @@
       padding:22px 0 70px;
     }
 
-    /* top bar */
     .nav{
       position:sticky; top:0;
       z-index:50;
@@ -94,10 +93,9 @@
       font-weight:750;
       font-size:13px;
       color:var(--muted);
+      transition:transform .08s ease;
     }
     .chip:hover{transform:translateY(-1px)}
-    .chip{transition:transform .08s ease, background .15s ease}
-
     .toggle{
       display:inline-flex;
       align-items:center;
@@ -112,7 +110,6 @@
       user-select:none;
     }
 
-    /* hero */
     .hero{
       margin-top:26px;
       display:grid;
@@ -129,16 +126,16 @@
     }
     .heroTitle{
       margin:0;
-      font-size: clamp(34px, 4vw, 52px);
-      line-height:1.02;
-      letter-spacing:-1.2px;
+      font-size: clamp(34px, 4vw, 50px);
+      line-height:1.04;
+      letter-spacing:-1px;
     }
     .heroSub{
       margin:12px 0 0;
       color:var(--muted);
-      line-height:1.55;
+      line-height:1.6;
       font-size:15px;
-      max-width:70ch;
+      max-width:72ch;
     }
     .ctaRow{
       display:flex;
@@ -162,10 +159,6 @@
       transition:transform .08s ease, box-shadow .15s ease, background .15s ease;
     }
     .btn:hover{transform:translateY(-1px)}
-    .btn.primary{
-      border-color: color-mix(in oklab, var(--accent) 55%, var(--border));
-      background: linear-gradient(135deg, color-mix(in oklab, var(--accent) 22%, transparent), color-mix(in oklab, var(--accent2) 18%, transparent));
-    }
     .btn.dark{
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       border-color: transparent;
@@ -179,7 +172,6 @@
       line-height:1.5;
     }
 
-    /* side card */
     .sideTitle{
       margin:0 0 10px;
       font-weight:900;
@@ -188,7 +180,6 @@
     }
     .kList{margin:0; padding-left:18px; color:var(--muted); line-height:1.7; font-size:14px}
 
-    /* projects */
     .sectionTitle{
       margin:22px 0 12px;
       font-size:16px;
@@ -202,8 +193,6 @@
       gap:14px;
     }
     .pCard{
-      position:relative;
-      overflow:hidden;
       padding:16px;
       border-radius: var(--r);
       border:1px solid var(--border);
@@ -241,7 +230,6 @@
       color: color-mix(in oklab, var(--accent) 90%, var(--text));
     }
 
-    /* footer */
     .footer{
       margin-top:20px;
       color:var(--muted);
@@ -249,7 +237,6 @@
       text-align:center;
     }
 
-    /* responsive */
     @media (max-width: 900px){
       .hero{grid-template-columns:1fr}
       .projects{grid-template-columns:1fr}
@@ -269,7 +256,7 @@
         <a class="chip" href="https://github.com/shlokbhutani13" target="_blank" rel="noreferrer">GitHub</a>
         <a class="chip" href="https://www.linkedin.com/in/shlokbhutani/" target="_blank" rel="noreferrer">LinkedIn</a>
         <a class="chip" href="Shlok_Bhutani_Resume_2.pdf" target="_blank" rel="noreferrer">Resume</a>
-        <div class="toggle" id="themeToggle">Toggle theme</div>
+        <div class="toggle" id="themeToggle">Theme</div>
       </div>
     </div>
   </div>
@@ -277,16 +264,16 @@
   <main class="container">
     <section class="hero">
       <div class="card">
-        <h1 class="heroTitle">CS student who ships real projects.</h1>
+        <h1 class="heroTitle">Hi, I’m Shlok.</h1>
         <p class="heroSub">
-          I’m Shlok, a Computer Science student at UNC Chapel Hill. I like building clean, practical projects in ML,
-          web apps, and data — and making them actually deploy and run.
+          I’m a CS student at UNC. I like building projects that are simple, clean, and actually run.
+          Most of my work is ML demos and small web apps with a good UI.
         </p>
 
         <div class="ctaRow">
           <a class="btn dark" href="Shlok_Bhutani_Resume_2.pdf" target="_blank" rel="noreferrer">Open resume</a>
-          <a class="btn primary" href="https://www.linkedin.com/in/shlokbhutani/" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a class="btn" href="https://github.com/shlokbhutani13" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/shlokbhutani/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a class="btn" href="mailto:sbhutani@unc.edu">Email me</a>
           <button class="btn" id="copyEmail">Copy email</button>
         </div>
 
@@ -296,16 +283,12 @@
       </div>
 
       <aside class="card">
-        <h3 class="sideTitle">Focus</h3>
+        <h3 class="sideTitle">About</h3>
         <ul class="kList">
-          <li>Machine learning demos and deployable apps</li>
-          <li>Full-stack projects with clean UI</li>
-          <li>Tools that feel polished and usable</li>
+          <li>I like shipping projects end-to-end (code → deploy → link)</li>
+          <li>I care about clean UI and simple explanations</li>
+          <li>I’m interested in ML + practical apps</li>
         </ul>
-
-        <div class="miniText" style="margin-top:14px;">
-          Want to reach me fast? Email is best.
-        </div>
       </aside>
     </section>
 
@@ -313,17 +296,8 @@
 
     <section class="projects">
       <div class="pCard">
-        <p class="pName">Churn Probability</p>
-        <p class="pDesc">Predicts customer churn with a clean Streamlit UI and a trained model.</p>
-        <div class="pRow">
-          <a class="pill live" href="https://churn-probability-opcp7lvnjqqwejyoo77drm.streamlit.app/" target="_blank" rel="noreferrer">Live</a>
-          <a class="pill" href="https://github.com/shlokbhutani13/churn-probability" target="_blank" rel="noreferrer">Code</a>
-        </div>
-      </div>
-
-      <div class="pCard">
         <p class="pName">Doge Forecast</p>
-        <p class="pDesc">Streamlit app that explores and forecasts Dogecoin trends using historical data.</p>
+        <p class="pDesc">A Streamlit app that explores Dogecoin data and shows a simple forecast.</p>
         <div class="pRow">
           <a class="pill live" href="https://doge-forecast-hzbcysrfyyxfrqzagu6vu7.streamlit.app/" target="_blank" rel="noreferrer">Live</a>
           <a class="pill" href="https://github.com/shlokbhutani13/doge-forecast" target="_blank" rel="noreferrer">Code</a>
@@ -331,24 +305,35 @@
       </div>
 
       <div class="pCard">
+        <p class="pName">Churn Probability</p>
+        <p class="pDesc">Predicts customer churn with a Streamlit UI and a trained model.</p>
+        <div class="pRow">
+          <a class="pill live" href="https://churn-probability-opcp7lvnjqqwejyoo77drm.streamlit.app/" target="_blank" rel="noreferrer">Live</a>
+          <a class="pill" href="https://github.com/shlokbhutani13/churn-probability" target="_blank" rel="noreferrer">Code</a>
+        </div>
+      </div>
+
+      <div class="pCard">
         <p class="pName">Tword</p>
         <p class="pDesc">A dual-word Wordle-style game with login and saved progress.</p>
         <div class="pRow">
+          <a class="pill live" href="https://shlokbhutani13.github.io/tword/" target="_blank" rel="noreferrer">Live</a>
           <a class="pill" href="https://github.com/shlokbhutani13/tword" target="_blank" rel="noreferrer">Code</a>
         </div>
       </div>
 
       <div class="pCard">
         <p class="pName">Price Tracker</p>
-        <p class="pDesc">FastAPI demo web scraper that tracks a page price and shows it in a simple UI.</p>
+        <p class="pDesc">A FastAPI demo scraper that reads a page price and shows it in a simple UI.</p>
         <div class="pRow">
+          <a class="pill live" href="https://price-tracker-3sjc.onrender.com" target="_blank" rel="noreferrer">Live</a>
           <a class="pill" href="https://github.com/shlokbhutani13/price_tracker" target="_blank" rel="noreferrer">Code</a>
         </div>
       </div>
 
       <div class="pCard">
         <p class="pName">ML Regression Demo</p>
-        <p class="pDesc">A from-scratch regression demo focused on learning and clarity.</p>
+        <p class="pDesc">A small ML regression demo focused on clarity and learning.</p>
         <div class="pRow">
           <a class="pill" href="https://github.com/shlokbhutani13/ml-regression-demo" target="_blank" rel="noreferrer">Code</a>
         </div>
@@ -361,29 +346,26 @@
   </main>
 
   <script>
-    // year
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    // copy email
     const copyBtn = document.getElementById("copyEmail");
     copyBtn.addEventListener("click", async () => {
       try{
         await navigator.clipboard.writeText("sbhutani@unc.edu");
-        copyBtn.textContent = "Copied!";
+        copyBtn.textContent = "Copied";
         setTimeout(()=> copyBtn.textContent = "Copy email", 900);
       } catch {
-        alert("Copy failed. Email: sbhutani@unc.edu");
+        alert("Email: sbhutani@unc.edu");
       }
     });
 
-    // theme toggle (persist)
     const root = document.documentElement;
     const toggle = document.getElementById("themeToggle");
 
     function setTheme(t){
       root.setAttribute("data-theme", t);
       localStorage.setItem("sb_theme", t);
-      toggle.textContent = t === "dark" ? "Light mode" : "Dark mode";
+      toggle.textContent = t === "dark" ? "Light" : "Dark";
     }
 
     const saved = localStorage.getItem("sb_theme");
