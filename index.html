@@ -1,381 +1,68 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Shlok Bhutani</title>
-  <meta name="description" content="Shlok Bhutani — CS student at UNC Chapel Hill. I build small, real projects in ML and web apps." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Will You Be My Valentine? 💝</title>
 
-  <style>
-    :root{
-      --bg:#f7f7f8;
-      --card:#ffffff;
-      --text:#0f172a;
-      --muted:#475569;
-      --border:rgba(15,23,42,.12);
-      --shadow:0 18px 40px rgba(2,6,23,.10);
-      --shadow2:0 10px 25px rgba(2,6,23,.08);
-      --r:18px;
-
-      --accent:#2563eb;
-      --accent2:#7c3aed;
-      --chip:rgba(37,99,235,.10);
-      --chipBorder:rgba(37,99,235,.22);
-    }
-    [data-theme="dark"]{
-      --bg:#0b1020;
-      --card:rgba(255,255,255,.06);
-      --text:#e5e7eb;
-      --muted:rgba(229,231,235,.72);
-      --border:rgba(255,255,255,.10);
-      --shadow:0 18px 40px rgba(0,0,0,.45);
-      --shadow2:0 10px 25px rgba(0,0,0,.35);
-      --chip:rgba(37,99,235,.16);
-      --chipBorder:rgba(37,99,235,.30);
-    }
-
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      background:
-        radial-gradient(900px 500px at 20% -10%, rgba(37,99,235,.18), transparent 55%),
-        radial-gradient(800px 500px at 90% 10%, rgba(124,58,237,.15), transparent 55%),
-        var(--bg);
-      color:var(--text);
-    }
-    a{color:inherit; text-decoration:none}
-    .container{
-      width:min(1080px, calc(100% - 40px));
-      margin:0 auto;
-      padding:22px 0 70px;
-    }
-
-    .nav{
-      position:sticky; top:0;
-      z-index:50;
-      backdrop-filter: blur(10px);
-      background: color-mix(in oklab, var(--bg) 70%, transparent);
-      border-bottom:1px solid var(--border);
-    }
-    .navInner{
-      width:min(1080px, calc(100% - 40px));
-      margin:0 auto;
-      padding:14px 0;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:900;
-      letter-spacing:-.2px;
-    }
-    .logo{
-      width:38px; height:38px;
-      border-radius:14px;
-      display:grid; place-items:center;
-      border:1px solid var(--border);
-      background: color-mix(in oklab, var(--card) 85%, transparent);
-      box-shadow: var(--shadow2);
-      font-weight:900;
-    }
-    .navLinks{
-      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
-    }
-    .chip{
-      padding:9px 11px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background: color-mix(in oklab, var(--card) 85%, transparent);
-      font-weight:750;
-      font-size:13px;
-      color:var(--muted);
-      transition:transform .08s ease;
-    }
-    .chip:hover{transform:translateY(-1px)}
-    .toggle{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:9px 12px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background: color-mix(in oklab, var(--card) 85%, transparent);
-      cursor:pointer;
-      font-weight:800;
-      font-size:13px;
-      user-select:none;
-    }
-
-    .hero{
-      margin-top:26px;
-      display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap:14px;
-      align-items:stretch;
-    }
-    .card{
-      background: color-mix(in oklab, var(--card) 92%, transparent);
-      border:1px solid var(--border);
-      border-radius: var(--r);
-      box-shadow: var(--shadow);
-      padding:18px;
-    }
-    .heroTitle{
-      margin:0;
-      font-size: clamp(34px, 4vw, 50px);
-      line-height:1.04;
-      letter-spacing:-1px;
-    }
-    .heroSub{
-      margin:12px 0 0;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:15px;
-      max-width:72ch;
-    }
-    .ctaRow{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:16px;
-    }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding:11px 13px;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background: color-mix(in oklab, var(--card) 85%, transparent);
-      font-weight:850;
-      font-size:13px;
-      cursor:pointer;
-      user-select:none;
-      transition:transform .08s ease, box-shadow .15s ease, background .15s ease;
-    }
-    .btn:hover{transform:translateY(-1px)}
-    .btn.dark{
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      border-color: transparent;
-      color:white;
-      box-shadow: 0 14px 30px rgba(37,99,235,.22);
-    }
-    .miniText{
-      margin-top:12px;
-      color:var(--muted);
-      font-size:12px;
-      line-height:1.5;
-    }
-
-    .sideTitle{
-      margin:0 0 10px;
-      font-weight:900;
-      letter-spacing:-.2px;
-      font-size:16px;
-    }
-    .kList{margin:0; padding-left:18px; color:var(--muted); line-height:1.7; font-size:14px}
-
-    .sectionTitle{
-      margin:22px 0 12px;
-      font-size:16px;
-      font-weight:900;
-      letter-spacing:-.2px;
-      color:var(--text);
-    }
-    .projects{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap:14px;
-    }
-    .pCard{
-      padding:16px;
-      border-radius: var(--r);
-      border:1px solid var(--border);
-      background: color-mix(in oklab, var(--card) 92%, transparent);
-      box-shadow: var(--shadow2);
-      transition: transform .10s ease, box-shadow .15s ease, border-color .15s ease;
-    }
-    .pCard:hover{
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
-      border-color: color-mix(in oklab, var(--accent) 35%, var(--border));
-    }
-    .pName{margin:0; font-weight:950; letter-spacing:-.2px}
-    .pDesc{margin:8px 0 0; color:var(--muted); font-size:14px; line-height:1.55}
-    .pRow{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:12px;
-    }
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      padding:9px 10px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background: color-mix(in oklab, var(--card) 80%, transparent);
-      font-weight:850;
-      font-size:12px;
-      color:var(--text);
-    }
-    .pill.live{
-      border-color: var(--chipBorder);
-      background: var(--chip);
-      color: color-mix(in oklab, var(--accent) 90%, var(--text));
-    }
-
-    .footer{
-      margin-top:20px;
-      color:var(--muted);
-      font-size:12px;
-      text-align:center;
-    }
-
-    @media (max-width: 900px){
-      .hero{grid-template-columns:1fr}
-      .projects{grid-template-columns:1fr}
-    }
-  </style>
+  <!-- Better fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Nunito:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-  <div class="nav">
-    <div class="navInner">
-      <div class="brand">
-        <div class="logo">SB</div>
-        <div>Shlok Bhutani</div>
-      </div>
 
-      <div class="navLinks">
-        <a class="chip" href="https://github.com/shlokbhutani13" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="chip" href="https://www.linkedin.com/in/shlokbhutani/" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a class="chip" href="Shlok_Bhutani_Resume_2.pdf" target="_blank" rel="noreferrer">Resume</a>
-        <div class="toggle" id="themeToggle">Theme</div>
+  <!-- ✅ CONFESSION BUTTON OUTSIDE THE CONTAINER (TOP RIGHT OF THE PAGE) -->
+  <a class="confession-fab" href="confession.html">My Confession 💌</a>
+
+  <!-- Floating Background Elements -->
+  <div class="floating-elements"></div>
+
+  <!-- ✅ SECRET BUTTON OUTSIDE CONTAINER (TRUE bottom-right overlay) -->
+  <div class="secret-answer">
+    <button class="cute-btn special" onclick="showNextQuestion(2)" id="secretAnswerBtn"></button>
+  </div>
+
+  <!-- Main Content Container -->
+  <div class="container">
+    <h1 id="valentineTitle"></h1>
+
+    <!-- First Question -->
+    <div class="question-section" id="question1">
+      <h2 id="question1Text"></h2>
+      <button class="cute-btn" onclick="moveButton(this)" id="yesBtn1"></button>
+      <button class="cute-btn" onclick="moveButton(this)" id="noBtn1"></button>
+    </div>
+
+    <!-- Second Question -->
+    <div class="question-section hidden" id="question2">
+      <h2 id="question2Text"></h2>
+      <div class="love-meter">
+        <input type="range" min="0" max="10000" value="100" class="slider" id="loveMeter">
+        <p>
+          <span class="love-value-container"><span id="startText"></span> (<span id="loveValue">100</span>%)</span>
+          <span id="extraLove" class="hidden"></span>
+        </p>
       </div>
+      <button class="cute-btn" onclick="showNextQuestion(3)" id="nextBtn"></button>
+    </div>
+
+    <!-- Final Question -->
+    <div class="question-section hidden" id="question3">
+      <h2 id="question3Text"></h2>
+      <button class="cute-btn final-yes" onclick="celebrate()" id="yesBtn3"></button>
+      <button class="cute-btn" onclick="moveButton(this)" id="noBtn3"></button>
+    </div>
+
+    <!-- Celebration -->
+    <div class="celebration hidden" id="celebration">
+      <h2 id="celebrationTitle"></h2>
+      <p class="celebration-text" id="celebrationMessage"></p>
+      <p class="celebration-text" id="celebrationEmojis"></p>
     </div>
   </div>
 
-  <main class="container">
-    <section class="hero">
-      <div class="card">
-        <h1 class="heroTitle">Hi, I’m Shlok.</h1>
-        <p class="heroSub">
-          I’m a CS student at UNC. I like building projects that are simple, clean, and actually run.
-          Most of my work is ML demos and small web apps with a good UI.
-        </p>
-
-        <div class="ctaRow">
-          <a class="btn dark" href="Shlok_Bhutani_Resume_2.pdf" target="_blank" rel="noreferrer">Open resume</a>
-          <a class="btn" href="https://www.linkedin.com/in/shlokbhutani/" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a class="btn" href="mailto:sbhutani@unc.edu">Email me</a>
-          <button class="btn" id="copyEmail">Copy email</button>
-        </div>
-
-        <div class="miniText">
-          sbhutani@unc.edu • shlokbhutani@gmail.com
-        </div>
-      </div>
-
-      <aside class="card">
-        <h3 class="sideTitle">About</h3>
-        <ul class="kList">
-          <li>I like shipping projects end-to-end (code → deploy → link)</li>
-          <li>I care about clean UI and simple explanations</li>
-          <li>I’m interested in ML + practical apps</li>
-        </ul>
-      </aside>
-    </section>
-
-    <h2 class="sectionTitle">Projects</h2>
-
-    <section class="projects">
-      <div class="pCard">
-        <p class="pName">Doge Forecast</p>
-        <p class="pDesc">A Streamlit app that explores Dogecoin data and shows a simple forecast.</p>
-        <div class="pRow">
-          <a class="pill live" href="https://doge-forecast-hzbcysrfyyxfrqzagu6vu7.streamlit.app/" target="_blank" rel="noreferrer">Live</a>
-          <a class="pill" href="https://github.com/shlokbhutani13/doge-forecast" target="_blank" rel="noreferrer">Code</a>
-        </div>
-      </div>
-
-      <div class="pCard">
-        <p class="pName">Churn Probability</p>
-        <p class="pDesc">Predicts customer churn with a Streamlit UI and a trained model.</p>
-        <div class="pRow">
-          <a class="pill live" href="https://churn-probability-opcp7lvnjqqwejyoo77drm.streamlit.app/" target="_blank" rel="noreferrer">Live</a>
-          <a class="pill" href="https://github.com/shlokbhutani13/churn-probability" target="_blank" rel="noreferrer">Code</a>
-        </div>
-      </div>
-
-      <div class="pCard">
-        <p class="pName">Tword</p>
-        <p class="pDesc">A dual-word Wordle-style game with login and saved progress.</p>
-        <div class="pRow">
-          <a class="pill live" href="https://shlokbhutani13.github.io/tword/" target="_blank" rel="noreferrer">Live</a>
-          <a class="pill" href="https://github.com/shlokbhutani13/tword" target="_blank" rel="noreferrer">Code</a>
-        </div>
-      </div>
-
-      <div class="pCard">
-        <p class="pName">Price Tracker</p>
-        <p class="pDesc">A FastAPI demo scraper that reads a page price and shows it in a simple UI.</p>
-        <div class="pRow">
-          <a class="pill live" href="https://price-tracker-3sjc.onrender.com" target="_blank" rel="noreferrer">Live</a>
-          <a class="pill" href="https://github.com/shlokbhutani13/price_tracker" target="_blank" rel="noreferrer">Code</a>
-        </div>
-      </div>
-
-      <div class="pCard">
-        <p class="pName">ML Regression Demo</p>
-        <p class="pDesc">A small ML regression demo focused on clarity and learning.</p>
-        <div class="pRow">
-          <a class="pill" href="https://github.com/shlokbhutani13/ml-regression-demo" target="_blank" rel="noreferrer">Code</a>
-        </div>
-      </div>
-    </section>
-
-    <div class="footer">
-      © <span id="y"></span> Shlok Bhutani
-    </div>
-  </main>
-
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-
-    const copyBtn = document.getElementById("copyEmail");
-    copyBtn.addEventListener("click", async () => {
-      try{
-        await navigator.clipboard.writeText("sbhutani@unc.edu");
-        copyBtn.textContent = "Copied";
-        setTimeout(()=> copyBtn.textContent = "Copy email", 900);
-      } catch {
-        alert("Email: sbhutani@unc.edu");
-      }
-    });
-
-    const root = document.documentElement;
-    const toggle = document.getElementById("themeToggle");
-
-    function setTheme(t){
-      root.setAttribute("data-theme", t);
-      localStorage.setItem("sb_theme", t);
-      toggle.textContent = t === "dark" ? "Light" : "Dark";
-    }
-
-    const saved = localStorage.getItem("sb_theme");
-    const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-    setTheme(saved || (prefersDark ? "dark" : "light"));
-
-    toggle.addEventListener("click", () => {
-      const cur = root.getAttribute("data-theme") === "dark" ? "dark" : "light";
-      setTheme(cur === "dark" ? "light" : "dark");
-    });
-  </script>
+  <script src="config.js"></script>
+  <script src="theme.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

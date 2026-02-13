@@ -1,0 +1,524 @@
+/* CSS Variables - Will be updated by JavaScript */
+:root {
+  /* Colors */
+  --background-color-1: #ffafbd;
+  --background-color-2: #ffc3a0;
+  --button-color: #ff6b6b;
+  --button-hover: #ff8787;
+  --text-color: #ff4757;
+
+  /* Animations */
+  --float-duration: 15s;
+  --float-distance: 50px;
+  --bounce-speed: 0.5s;
+  --heart-explosion-size: 1.5;
+}
+
+/* ====== PAGE BASE ====== */
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  /* Tangled sky */
+  background:
+    radial-gradient(900px 650px at 18% 18%, rgba(255, 213, 106, 0.18), transparent 60%),
+    radial-gradient(900px 650px at 80% 22%, rgba(201, 179, 255, 0.28), transparent 62%),
+    radial-gradient(900px 650px at 55% 95%, rgba(255, 123, 189, 0.18), transparent 65%),
+    linear-gradient(135deg, var(--background-color-1), var(--background-color-2));
+
+  overflow:hidden;
+  color:#fff;
+
+  font-family: 'Nunito', Arial, sans-serif;
+}
+
+/* Tangled glow overlays */
+body::before{
+  content:"";
+  position: fixed;
+  inset: -20%;
+  pointer-events:none;
+  background:
+    radial-gradient(900px 650px at 18% 20%, rgba(255, 213, 106, 0.18), transparent 60%),
+    radial-gradient(900px 650px at 85% 25%, rgba(201, 179, 255, 0.20), transparent 62%),
+    radial-gradient(900px 650px at 55% 95%, rgba(255, 123, 189, 0.14), transparent 65%);
+  filter: blur(2px);
+  z-index: 0;
+}
+
+/* faint tower window silhouette */
+body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(255, 213, 106, 0.08), transparent 58%),
+    linear-gradient(90deg, rgba(0,0,0,0.18) 0%, transparent 18%, transparent 82%, rgba(0,0,0,0.18) 100%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03) 1px, transparent 1px, transparent 120px);
+  mix-blend-mode: screen;
+  opacity: 0.35;
+  z-index: 0;
+}
+
+/* ====== MAIN CARD ====== */
+.container {
+  background: rgba(18, 6, 35, 0.72);
+  border: 1px solid rgba(255, 213, 106, 0.40);
+  box-shadow: 0 22px 70px rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+
+  padding: 2rem;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 600px;
+  margin: 20px;
+  overflow: visible !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* Rapunzel-ish floral corners */
+.container::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius: 22px;
+  pointer-events:none;
+  background:
+    radial-gradient(140px 140px at 12% 12%, rgba(201, 179, 255, 0.18), transparent 60%),
+    radial-gradient(160px 160px at 88% 18%, rgba(255, 123, 189, 0.14), transparent 60%),
+    radial-gradient(170px 170px at 14% 88%, rgba(255, 213, 106, 0.14), transparent 62%),
+    radial-gradient(160px 160px at 86% 86%, rgba(201, 179, 255, 0.12), transparent 62%);
+  filter: blur(0.5px);
+  z-index: 0;
+}
+
+/* subtle golden rim */
+.container::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius: 20px;
+  pointer-events:none;
+  background:
+    radial-gradient(600px 180px at 25% 0%, rgba(255, 213, 106, 0.18), transparent 60%),
+    radial-gradient(520px 220px at 85% 5%, rgba(201, 179, 255, 0.14), transparent 60%),
+    radial-gradient(520px 240px at 50% 100%, rgba(255, 123, 189, 0.10), transparent 65%);
+}
+
+/* ====== HEADINGS ====== */
+h1, h2 {
+  font-family: 'DM Serif Display', serif;
+  letter-spacing: .2px;
+}
+
+h1{
+  margin-bottom: 1.4rem;
+  background: linear-gradient(90deg, #ffd166, #fff3c4, #c9b3ff, #ff7bbd);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 12px 30px rgba(0,0,0,.35);
+}
+
+h2 { color: rgba(255, 243, 196, 0.92); }
+
+/* ====== FLOATING ELEMENTS LAYER ====== */
+.floating-elements {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden; /* IMPORTANT: hides anything outside viewport */
+}
+
+/*
+  ✅ KEY FIX:
+  Your JS never sets top/bottom, so elements default to top: 0.
+  We FORCE all float elements to start from the bottom.
+*/
+.heart, .bear,
+.lantern-float, .sparkle-float, .tiramisu-float{
+  position: absolute;
+  top: auto !important;
+  bottom: -90px !important;   /* start below the screen */
+  opacity: 0;                 /* invisible until they float in */
+  animation-fill-mode: backwards;
+  will-change: transform, opacity;
+}
+
+/* Tangled lanterns (glowing shapes) */
+.lantern-float{
+  width: 20px;
+  height: 28px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255, 213, 106, 0.98), rgba(255, 213, 106, 0.18));
+  box-shadow:
+    0 0 22px rgba(255, 213, 106, 0.40),
+    0 0 55px rgba(255, 213, 106, 0.22);
+  filter: saturate(1.1);
+}
+
+.lantern-float::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:-7px;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 7px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.30);
+}
+
+.lantern-float::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top: 100%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 14px;
+  background: rgba(255,255,255,0.20);
+  border-radius: 2px;
+}
+
+/* Tiramisu crumbs floating */
+.tiramisu-float{
+  font-size: 1.25rem;
+  opacity: 0;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.35));
+}
+
+/* Sparkles / flowers floating */
+.sparkle-float{
+  font-size: 1.6rem;
+  opacity: 0;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,0.35));
+}
+
+/* Smooth float + fade in/out (prevents "stuck row at top") */
+@keyframes float {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(-120vh) translateX(var(--float-distance)); opacity: 0; }
+}
+
+.heart, .bear,
+.lantern-float, .sparkle-float, .tiramisu-float{
+  animation: float var(--float-duration) linear infinite;
+}
+
+/* flicker + twinkle (Tangled vibe) */
+@keyframes lanternFlicker{
+  0%,100%{ filter: brightness(1); }
+  50%{ filter: brightness(1.18); }
+}
+.lantern-float{
+  animation:
+    float var(--float-duration) linear infinite,
+    lanternFlicker 2.6s ease-in-out infinite;
+}
+
+@keyframes twinkle{
+  0%,100%{ transform: scale(1); }
+  50%{ transform: scale(1.18); }
+}
+.sparkle-float{
+  animation:
+    float var(--float-duration) linear infinite,
+    twinkle 1.8s ease-in-out infinite;
+}
+
+/* ====== BUTTONS ====== */
+.cute-btn {
+  background: linear-gradient(90deg, var(--button-color), rgba(201,179,255,0.95));
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 20px;
+  color: #1a082f;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+  font-weight: 800;
+}
+
+.cute-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(90deg, var(--button-hover), rgba(255, 123, 189, 0.9));
+}
+
+
+.hidden { display:none; }
+
+.disabled-btn {
+  opacity: 0.7;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ====== SECRET BUTTON (bottom-right like original) ====== */
+.secret-answer{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 15;
+
+  opacity: 0.2;
+  transition: opacity 0.3s;
+  transform: scale(0.7);
+  animation: subtle-hint 2s infinite alternate;
+  animation-delay: 5s;
+}
+
+.secret-answer .cute-btn {
+  font-size: 0.8rem;
+  padding: 5px 10px;
+}
+
+.secret-answer:hover {
+  opacity: 1;
+  animation: none;
+}
+
+@keyframes subtle-hint {
+  0% { opacity: 0.18; }
+  100% { opacity: 0.30; }
+}
+
+/* ====== LOVE METER ====== */
+.love-meter {
+  position: relative;
+  width: 100%;
+  margin: 20px auto;
+  overflow: visible;
+  padding: 10px 0;
+}
+
+.love-meter p {
+  font-size: 1.2em;
+  margin: 15px 0;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.slider {
+  width: 100%;
+  height: 25px;
+  background: linear-gradient(to right, #ff6b6b, #ff8787, #ffb8b8);
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  position: relative;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.2);
+  transition: all 0.3s ease;
+}
+
+.slider:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+}
+
+.slider::-webkit-slider-runnable-track,
+.slider::-moz-range-track {
+  width: 100%;
+  height: 25px;
+  background: linear-gradient(to right, #ff6b6b, #ff8787, #ffb8b8);
+  border-radius: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 35px;
+  height: 35px;
+  background: linear-gradient(135deg, #ff4757, #ff6b6b);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(255, 71, 87, 0.3);
+  position: relative;
+  z-index: 10;
+  margin-top: -5px;
+  border: 3px solid white;
+  transition: all 0.2s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+}
+
+.slider::-moz-range-thumb {
+  width: 35px;
+  height: 35px;
+  background: linear-gradient(135deg, #ff4757, #ff6b6b);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(255, 71, 87, 0.3);
+  position: relative;
+  z-index: 10;
+  border: 3px solid white;
+  transition: all 0.2s ease;
+}
+
+.slider::-moz-range-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+}
+
+#extraLove {
+  color: #ff6b6b;
+  font-weight: bold;
+  animation: bounce 0.5s infinite alternate;
+  display: block;
+  padding: 5px 10px;
+  border-radius: 10px;
+  background: rgba(255, 107, 107, 0.1);
+  text-shadow: 0 2px 4px rgba(255, 71, 87, 0.2);
+  transition: all 0.3s ease;
+  margin-top: 5px;
+}
+
+#extraLove.super-love {
+  background: rgba(255, 107, 107, 0.2);
+  font-size: 1.2em;
+  padding: 8px 15px;
+  box-shadow: 0 4px 15px rgba(255, 71, 87, 0.2);
+}
+
+#loveValue {
+  font-weight: bold;
+  color: #ff4757;
+  font-size: 1.3em;
+  transition: all 0.3s ease;
+}
+
+.love-value-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+@keyframes bounce {
+  from { transform: scale(1); }
+  to { transform: scale(1.2); }
+}
+
+/* ====== CELEBRATION ====== */
+.hearts-explosion {
+  font-size: 2rem;
+  animation: explode 1s ease-out forwards;
+  margin-top: 30px;
+}
+
+@keyframes explode {
+  0% { transform: scale(0); }
+  50% { transform: scale(var(--heart-explosion-size)); }
+  100% { transform: scale(1); }
+}
+
+.celebration-text {
+  font-size: 3em;
+  color: #ff4757;
+  font-weight: bold;
+  margin: 30px 0;
+  animation: bounce var(--bounce-speed) infinite alternate;
+  text-shadow: 2px 2px 4px rgba(255, 71, 87, 0.3);
+}
+
+.super-love {
+  font-size: 1.5em;
+  color: #ff4757;
+  font-weight: bold;
+  transform: scale(1.2);
+  display: inline-block;
+  text-shadow: 2px 2px 4px rgba(255, 71, 87, 0.3);
+}
+
+/* ====== CONFESSION BUTTON TOP RIGHT ====== */
+.confession-fab{
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 9999;
+
+  padding: 12px 16px;
+  border-radius: 0 0 0 18px;
+
+  text-decoration: none;
+  font-weight: 900;
+  color: #1a082f;
+  background: linear-gradient(90deg, #ffd166, #ffe08a, #c9b3ff);
+  border: 1px solid rgba(255,255,255,0.22);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.35);
+  transition: transform 0.2s ease;
+}
+.confession-fab:hover{ transform: translateY(2px) scale(1.02); }
+
+/* ====== MUSIC CONTROLS ====== */
+.music-controls {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.music-btn {
+  background: linear-gradient(90deg, var(--button-color), rgba(201,179,255,0.95));
+  color: #1a082f;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.music-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(90deg, var(--button-hover), rgba(255, 123, 189, 0.9));
+}
+
+/* ====== SCREEN SHAKE (ONE VERSION ONLY) ====== */
+@keyframes screenShake{
+  0%{ transform: translate(0,0); }
+  15%{ transform: translate(-10px, 6px); }
+  30%{ transform: translate(9px, -6px); }
+  45%{ transform: translate(-8px, -4px); }
+  60%{ transform: translate(8px, 5px); }
+  75%{ transform: translate(-6px, 4px); }
+  100%{ transform: translate(0,0); }
+}
+
+body.screen-shake {
+  animation: screenShake 260ms ease-in-out;
+}
+
+/* ====== CONFESSION PAGE HELPERS ====== */
+.confession-container{ max-width: 760px; }
+.confession-title{ margin-bottom: 10px; }
+.confession-sub{ color: rgba(255,255,255,0.75); margin-top: 0; }
+.confession-box{
+  margin: 18px auto 10px;
+  text-align: left;
+  min-height: 220px;
+  padding: 16px 16px;
+  border-radius: 18px;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255, 213, 106, 0.25);
+  color: rgba(255,255,255,0.92);
+  outline: none;
+}
+.confession-back{ display:inline-block; }
