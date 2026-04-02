@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shlok Bhutani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f9f8f5;
+    --surface: #ffffff;
+    --text: #1a1a1a;
+    --muted: #6b6b6b;
+    --subtle: #d4d2cc;
+    --accent: #2a5c45;
+    --accent-light: #e8f2ed;
+    --tag-bg: #f0efe9;
+    --tag-text: #3a3a3a;
+    --link: #2a5c45;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(249,248,245,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--subtle);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4rem;
+    height: 60px;
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* SECTIONS */
+  section { padding: 5rem 0; }
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* HERO */
+  #hero {
+    padding-top: 10rem;
+    padding-bottom: 5rem;
+    border-bottom: 1px solid var(--subtle);
+  }
+  .hero-eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 540px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--text);
+    color: #fff;
+    text-decoration: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 3px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 3px;
+    font-size: 0.875rem;
+    border: 1px solid var(--subtle);
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--text); color: var(--text); }
+
+  /* SECTION LABELS */
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--subtle);
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .about-text p {
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+  .about-details { }
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--subtle);
+    font-size: 0.9rem;
+  }
+  .detail-row:first-child { border-top: 1px solid var(--subtle); }
+  .detail-key { color: var(--muted); font-weight: 400; }
+  .detail-val { color: var(--text); font-weight: 500; text-align: right; }
+
+  /* PROJECTS */
+  .project-list { display: flex; flex-direction: column; gap: 1.5px; }
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--subtle);
+    padding: 1.75rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: start;
+    transition: border-color 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .project-card:hover { border-color: var(--text); }
+  .project-card-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: start;
+  }
+  .project-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.01em;
+  }
+  .project-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: 0.9rem;
+  }
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .tag {
+    font-size: 0.72rem;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    padding: 0.2rem 0.65rem;
+    border-radius: 2px;
+    letter-spacing: 0.03em;
+    font-weight: 500;
+  }
+  .project-arrow {
+    font-size: 1.1rem;
+    color: var(--muted);
+    transition: transform 0.2s;
+    margin-top: 0.2rem;
+  }
+  .project-card:hover .project-arrow { transform: translate(3px, -3px); }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .skill-group-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .skill-item {
+    font-size: 0.9rem;
+    color: var(--muted);
+    padding: 0.35rem 0;
+    border-bottom: 1px solid var(--subtle);
+    font-weight: 300;
+  }
+  .skill-item:last-child { border-bottom: none; }
+
+  /* EDUCATION */
+  .edu-card {
+    background: var(--surface);
+    border: 1px solid var(--subtle);
+    padding: 2rem;
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+  .edu-year {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-weight: 400;
+    white-space: nowrap;
+    padding-top: 0.3rem;
+    min-width: 90px;
+  }
+  .edu-body {}
+  .edu-school {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.3rem;
+  }
+  .edu-degree {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 0.6rem;
+  }
+  .edu-detail {
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .contact-intro {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+  .contact-intro em { font-style: italic; color: var(--accent); }
+  .contact-note {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 1px; }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--subtle);
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .contact-link:hover { border-color: var(--text); background: var(--accent-light); }
+  .contact-link span { color: var(--muted); font-size: 0.75rem; font-weight: 400; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--subtle);
+    padding: 2rem 0;
+    text-align: center;
+  }
+  footer p {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.6s ease both; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.35s; }
+  .delay-4 { animation-delay: 0.5s; }
+
+  @media (max-width: 680px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    .container { padding: 0 1.25rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .skills-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .edu-card { flex-direction: column; gap: 0.5rem; }
+    section { padding: 3.5rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#hero">SB</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <p class="hero-eyebrow fade-up">CS Student · ML · Software Developer</p>
+    <h1 class="hero-name fade-up delay-1">Shlok<br/><em>Bhutani</em></h1>
+    <p class="hero-sub fade-up delay-2">
+      Building machine learning systems and full-stack applications at UNC Chapel Hill.
+      Interested in predictive modeling, data science, and software that solves real problems.
+    </p>
+    <div class="hero-cta fade-up delay-3">
+      <a class="btn-primary" href="https://github.com/shlokbhutani13/shlokbhutani13.github.io/raw/main/Shlok_Bhutani_Resume_2.pdf" target="_blank">
+        Resume ↓
+      </a>
+      <a class="btn-ghost" href="https://github.com/shlokbhutani13" target="_blank">
+        GitHub →
+      </a>
+      <a class="btn-ghost" href="#contact">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <p class="section-label">About me</p>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a Computer Science student at UNC Chapel Hill, working across machine learning,
+          data science, and full-stack development. I like building things that are actually useful —
+          from predictive models to web apps with real users.
+        </p>
+        <p>
+          What I'm most drawn to right now is AI automation, especially in healthcare. There's a
+          lot of room for ML to make a genuine difference there — in diagnosis, workflow, patient
+          outcomes — and I want to be part of building that.
+        </p>
+        <p>
+          Outside of projects, I'm usually digging into a new dataset, thinking through product
+          ideas, or playing competitive games.
+        </p>
+      </div>
+      <div class="about-details">
+        <div class="detail-row">
+          <span class="detail-key">Based in</span>
+          <span class="detail-val">Chapel Hill, NC</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-key">University</span>
+          <span class="detail-val">UNC Chapel Hill</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-key">Focus</span>
+          <span class="detail-val">ML & Software Dev</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-key">GitHub</span>
+          <span class="detail-val"><a href="https://github.com/shlokbhutani13" style="color: var(--link);">shlokbhutani13</a></span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-key">Open to</span>
+          <span class="detail-val">Internships · SWE · ML</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <p class="section-label">Projects</p>
+    <div class="project-list">
+
+      <a class="project-card" href="https://github.com/shlokbhutani13/tword" target="_blank">
+        <div class="project-card-inner">
+          <div>
+            <p class="project-name">Tword</p>
+            <p class="project-desc">
+              A dual-word Wordle-style browser game where players simultaneously guess two hidden five-letter words. 
+              Features full authentication, persistent game state, and live score tracking.
+            </p>
+            <div class="project-tags">
+              <span class="tag">JavaScript</span>
+              <span class="tag">Full Stack</span>
+              <span class="tag">Auth</span>
+              <span class="tag">Browser Game</span>
+            </div>
+          </div>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://github.com/shlokbhutani13/churn-probability" target="_blank">
+        <div class="project-card-inner">
+          <div>
+            <p class="project-name">Churn Probability</p>
+            <p class="project-desc">
+              End-to-end customer churn prediction using the Telco dataset. Covers data preprocessing, feature engineering, 
+              model training and evaluation, and deployment via Streamlit.
+            </p>
+            <div class="project-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Machine Learning</span>
+              <span class="tag">Streamlit</span>
+              <span class="tag">Classification</span>
+            </div>
+          </div>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://github.com/shlokbhutani13/doge-forecast" target="_blank">
+        <div class="project-card-inner">
+          <div>
+            <p class="project-name">Doge Forecast</p>
+            <p class="project-desc">
+              Dogecoin price forecasting application using historical market data and multiple ML models. 
+              Includes data retrieval, model training, evaluation metrics, and visualization.
+            </p>
+            <div class="project-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Time Series</span>
+              <span class="tag">Forecasting</span>
+              <span class="tag">Crypto</span>
+            </div>
+          </div>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://github.com/shlokbhutani13/price_tracker" target="_blank">
+        <div class="project-card-inner">
+          <div>
+            <p class="project-name">Price Tracker</p>
+            <p class="project-desc">
+              FastAPI-based web scraping application for product price monitoring. Demonstrates backend API design, 
+              database integration, and deployment patterns.
+            </p>
+            <div class="project-tags">
+              <span class="tag">Python</span>
+              <span class="tag">FastAPI</span>
+              <span class="tag">Web Scraping</span>
+              <span class="tag">REST API</span>
+            </div>
+          </div>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://github.com/shlokbhutani13/ml-regression-demo" target="_blank">
+        <div class="project-card-inner">
+          <div>
+            <p class="project-name">ML Regression Demo</p>
+            <p class="project-desc">
+              Linear regression implemented from scratch with NumPy — no high-level ML libraries. 
+              Explores gradient descent, loss functions, and model evaluation fundamentals.
+            </p>
+            <div class="project-tags">
+              <span class="tag">Python</span>
+              <span class="tag">NumPy</span>
+              <span class="tag">Regression</span>
+              <span class="tag">From Scratch</span>
+            </div>
+          </div>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <p class="section-label">Skills</p>
+    <div class="skills-grid">
+      <div>
+        <p class="skill-group-title">Languages</p>
+        <p class="skill-item">Python</p>
+        <p class="skill-item">JavaScript / TypeScript</p>
+        <p class="skill-item">SQL / MySQL</p>
+        <p class="skill-item">HTML / CSS</p>
+      </div>
+      <div>
+        <p class="skill-group-title">ML & Data</p>
+        <p class="skill-item">scikit-learn</p>
+        <p class="skill-item">PyTorch</p>
+        <p class="skill-item">Pandas / NumPy</p>
+        <p class="skill-item">Matplotlib</p>
+        <p class="skill-item">Time Series</p>
+      </div>
+      <div>
+        <p class="skill-group-title">Tools & Frameworks</p>
+        <p class="skill-item">FastAPI</p>
+        <p class="skill-item">Streamlit</p>
+        <p class="skill-item">Git / GitHub</p>
+        <p class="skill-item">Excel</p>
+        <p class="skill-item">REST APIs</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <p class="section-label">Education</p>
+    <div style="display: flex; flex-direction: column; gap: 1.5px;">
+      <div class="edu-card">
+        <span class="edu-year">2024 – 2028</span>
+        <div class="edu-body">
+          <p class="edu-school">University of North Carolina at Chapel Hill</p>
+          <p class="edu-degree">Bachelor of Science, Computer Science</p>
+          <p class="edu-detail">Focus: Machine Learning · AI · Software Development</p>
+        </div>
+      </div>
+      <div class="edu-card">
+        <span class="edu-year">2023 – 2025</span>
+        <div class="edu-body">
+          <p class="edu-school">Jayshree Periwal International School</p>
+          <p class="edu-degree">High School</p>
+        </div>
+      </div>
+      <div class="edu-card">
+        <span class="edu-year">2012 – 2023</span>
+        <div class="edu-body">
+          <p class="edu-school">Delhi Public School Surat</p>
+          <p class="edu-degree">K–12</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <p class="section-label">Contact</p>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-intro">Let's build something <em>together.</em></p>
+        <p class="contact-note">
+          Currently open to internship opportunities in software engineering, 
+          machine learning, and data science. Don't hesitate to reach out.
+        </p>
+      </div>
+      <div class="contact-links">
+        <a class="contact-link" href="https://github.com/shlokbhutani13" target="_blank">
+          GitHub <span>shlokbhutani13 ↗</span>
+        </a>
+        <a class="contact-link" href="https://www.linkedin.com/in/shlokbhutani/" target="_blank">
+          LinkedIn <span>shlokbhutani ↗</span>
+        </a>
+        <a class="contact-link" href="mailto:sbhutani@unc.edu">
+          UNC Email <span>sbhutani@unc.edu ↗</span>
+        </a>
+        <a class="contact-link" href="mailto:shlokbhutani@gmail.com">
+          Personal Email <span>shlokbhutani@gmail.com ↗</span>
+        </a>
+        <a class="contact-link" href="https://github.com/shlokbhutani13/shlokbhutani13.github.io/raw/main/Shlok_Bhutani_Resume_2.pdf" target="_blank">
+          Resume <span>Download PDF ↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
