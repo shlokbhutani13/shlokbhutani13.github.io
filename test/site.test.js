@@ -20,17 +20,37 @@ test("uses semantic landmarks and accessibility hooks", () => {
   assert.match(css, /prefers-reduced-motion/);
 });
 
-test("features the strongest current repositories and the live RKS site", () => {
+test("lists every current public project and the live RKS site", () => {
   for (const link of [
+    "https://github.com/shlokbhutani13/signaldesk",
+    "https://github.com/shlokbhutani13/retinopathy-grading",
     "https://github.com/shlokbhutani13/globeready",
     "https://github.com/shlokbhutani13/nudgefund",
-    "https://www.rksanitarywares.com/",
-    "https://github.com/shlokbhutani13/ml-playground",
     "https://github.com/shlokbhutani13/churn-probability",
+    "https://github.com/shlokbhutani13/ml-playground",
     "https://github.com/shlokbhutani13/doge-forecast",
     "https://github.com/shlokbhutani13/ai-outlook",
+    "https://github.com/shlokbhutani13/tword",
+    "https://github.com/shlokbhutani13/price_tracker",
+    "https://www.rksanitarywares.com/",
   ]) {
     assert.match(html, new RegExp(link.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  }
+
+  for (const title of [
+    "SignalDesk",
+    "Retinopathy Grading",
+    "GlobeReady",
+    "NudgeFund",
+    "Churn Probability",
+    "ML Playground",
+    "DOGE Forecast Lab",
+    "AI Outlook",
+    "Tword",
+    "Price Tracker",
+    "RK Sanitarywares",
+  ]) {
+    assert.match(html, new RegExp(`>${title}<`));
   }
 });
 
