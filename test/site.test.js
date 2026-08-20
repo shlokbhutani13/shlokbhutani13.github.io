@@ -54,6 +54,20 @@ test("links deployed projects to their live apps", () => {
   }
 });
 
+test("places RK Sanitarywares first in the project list with its custom domain", () => {
+  const projectList = html.match(/<div class="project-list"[\s\S]*?<\/div>\n      <\/section>/)?.[0];
+  const firstProject = projectList?.match(/<article class="project-row">[\s\S]*?<\/article>/)?.[0];
+
+  assert.ok(projectList);
+  assert.ok(firstProject);
+  assert.match(
+    firstProject,
+    /project-index">04<\/div>[\s\S]*?<h3>RK Sanitarywares<\/h3>/,
+  );
+  assert.match(firstProject, /https:\/\/www\.rksanitarywares\.com\//);
+  assert.doesNotMatch(firstProject, /Vercel/);
+});
+
 test("removes stale projects and includes share metadata", () => {
   assert.doesNotMatch(html, /ml-regression-demo/);
   assert.match(html, /property="og:title"/);
