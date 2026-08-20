@@ -20,18 +20,18 @@ test("uses semantic landmarks and accessibility hooks", () => {
   assert.match(css, /prefers-reduced-motion/);
 });
 
-test("lists every current public project and the live RKS site", () => {
+test("links deployed projects to their live apps", () => {
   for (const link of [
-    "https://github.com/shlokbhutani13/signaldesk",
-    "https://github.com/shlokbhutani13/retinopathy-grading",
-    "https://github.com/shlokbhutani13/globeready",
-    "https://github.com/shlokbhutani13/nudgefund",
-    "https://github.com/shlokbhutani13/churn-probability",
+    "https://signaldesk-ten-mauve.vercel.app/",
+    "https://retinopathy-grading-4mwhffmvucwr59zg4sehsz.streamlit.app/",
+    "https://globe-ready.web.app/",
+    "https://nudgefund.vercel.app/",
+    "https://churn-probability-opcp7lvnjqqwejyoo77drm.streamlit.app/",
     "https://github.com/shlokbhutani13/ml-playground",
-    "https://github.com/shlokbhutani13/doge-forecast",
+    "https://doge-forecast-hzbcysrfyyxfrqzagu6vu7.streamlit.app/",
     "https://github.com/shlokbhutani13/ai-outlook",
-    "https://github.com/shlokbhutani13/tword",
-    "https://github.com/shlokbhutani13/price_tracker",
+    "https://shlokbhutani13.github.io/tword/",
+    "https://price-tracker-3sjc.onrender.com/",
     "https://www.rksanitarywares.com/",
   ]) {
     assert.match(html, new RegExp(link.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
